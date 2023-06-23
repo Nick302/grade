@@ -72,28 +72,22 @@ public class SalaryServiceImpl implements SalaryService {
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
     public Optional<Position> createPosition(PostCreatePosition position) {
-        Position pos = new Position();
-        switch (position.getNamePos()){
-            case  "JUNIOR":
-                pos.setPositionTitle(PositionTitle.JUNIOR);
-                    break;
-            case  "MIDDLE":
-                pos.setPositionTitle(PositionTitle.MIDDLE);
-                break;
-            case  "SENIOR":
-                pos.setPositionTitle(PositionTitle.SENIOR);
-                break;
-            case  "TEAMLEAD":
-                pos.setPositionTitle(PositionTitle.TEAMLEAD);
-                break;
-            case  "MANAGER":
-                pos.setPositionTitle(PositionTitle.MANAGER);
-                break;
+        Position newPositon = new Position();
+        var namePosition = PositionTitle.valueOf(position.getNamePos());
+
+        if(namePosition != null) {
+            newPositon.setPositionTitle(namePosition);
+            return Optional.ofNullable(positionRepository.save(newPositon));
         }
-        return Optional.ofNullable(positionRepository.save(pos));
+
+        return Optional.empty();
     }
 
+    @Transactional(readOnly = true)
+    @Override
     public Optional<Salary> getSalaryById(Integer id) {
         return salaryRepository.findById(id);
     }

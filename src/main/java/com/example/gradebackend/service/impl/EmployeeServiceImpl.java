@@ -38,34 +38,44 @@ import java.util.Optional;
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
+    @Value("${packageOne}")
+    String packageOne;
+    @Value("${packageTwo}")
+    String packageTwo;
+
     private final EmployeeRepository employeeRepository;
     private final TaskRepository taskRepository;
     private final SalaryRepository salaryRepository;
     private final DepartmentRepository departmentRepository;
 
-    String bucket = "C:\\JOB\\grade-vue\\public\\assets";
-    String bucket2 = "C:\\JOB\\grade-vue\\src\\assets";
-
     public void updatePathPhoto(Integer id, String path) {
        Optional<Employee> employee = employeeRepository.findById(id);
        if(employee.isEmpty()) return;
+
        employee.get().setPathPhoto(path);
        employeeRepository.save(employee.get());
     }
 
     @Override
     public void upload(String imagePath, InputStream content) throws IOException {
-      Path fullImagePath = Path.of(bucket, imagePath);
-        Path fullImagePath2 = Path.of(bucket2, imagePath);
+        Path fullImagePath = Path.of(packageOne, imagePath);
+        Path fullImagePath2 = Path.of(packageTwo, imagePath);
+
         try (content) {
             Files.createDirectories(fullImagePath.getParent());
+            Thread.sleep(500);
             Files.createDirectories(fullImagePath2.getParent());
+            Thread.sleep(500);
             Files.write(fullImagePath, content.readAllBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Thread.sleep(500);
             Files.write(fullImagePath2, content.readAllBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Transactional(readOnly = true)
+    @Override
     public Optional<Employee> getEmployeeByEmail(@RequestBody PostGetEmployeeByEmailRequest employee) {
         return employeeRepository.findByEmail(employee.getEmail());
     }
@@ -154,6 +164,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return Optional.ofNullable(employeeRepository.save(foundEmployee.get()));
     }
 
+    @Override
     public Optional<Employee> setDepartmentOnEmployee(PostSetDepartmentOnEmployeeRequest postSetDepartmentOnEmployee) {
         int idEmployee = postSetDepartmentOnEmployee.getIdEmployee();
         int idDepartment = postSetDepartmentOnEmployee.getIdDepartment();

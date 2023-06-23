@@ -5,5 +5,6 @@ public enum PositionTitle {
     MIDDLE,
     SENIOR,
     TEAMLEAD,
-    MANAGER;
+    MANAGER,
+    CEO;
 }

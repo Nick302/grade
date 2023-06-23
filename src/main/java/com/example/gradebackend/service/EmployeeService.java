@@ -1,10 +1,13 @@
 package com.example.gradebackend.service;
 
 import com.example.gradebackend.model.domain.Employee;
+import com.example.gradebackend.model.dto.request.PostGetEmployeeByEmailRequest;
+import com.example.gradebackend.model.dto.request.PostSetDepartmentOnEmployeeRequest;
 import com.example.gradebackend.model.dto.request.PostSetSalaryRequest;
 import com.example.gradebackend.model.dto.request.PostSetTaskRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,4 +31,8 @@ public interface EmployeeService {
     Optional<Employee> setTaskOnEmployee(PostSetTaskRequest postSetTaskRequest);
 
     Optional<Employee> setSalaryOnEmployee(PostSetSalaryRequest postSetSalaryRequest);
+
+    Optional<Employee> setDepartmentOnEmployee(PostSetDepartmentOnEmployeeRequest postSetDepartmentOnEmployee);
+
+    Optional<Employee> getEmployeeByEmail(PostGetEmployeeByEmailRequest employee);
 }

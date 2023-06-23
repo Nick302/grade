@@ -35,19 +35,13 @@ public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
 
-
-
-    @PostMapping("/photo")
-    public void uploadProfilePhoto(@ModelAttribute ProfilePhotoRequest request) throws IOException {
+    @Operation(summary = "Post Upload image",
+            description = "Post Upload image")
+    @PostMapping("/photo/{id}")
+    public void uploadProfilePhoto(@ModelAttribute ProfilePhotoRequest request, @PathVariable Integer id) throws IOException {
         MultipartFile photo = request.getPhoto();
         employeeService.upload(request.getPhoto().getOriginalFilename(), request.getPhoto().getInputStream());
-        employeeService.updatePathPhoto(1, request.getPhoto().getOriginalFilename());
-    }
-
-    @PostMapping("/image")
-    public void setEmployeePhoto(@RequestParam MultipartFile file) throws IOException {
-     employeeService.upload(file.getOriginalFilename(), file.getInputStream());
-     employeeService.updatePathPhoto(1, file.getOriginalFilename());
+        employeeService.updatePathPhoto(id, request.getPhoto().getOriginalFilename());
     }
 
     @Operation(summary = "Get by email",
@@ -163,7 +157,6 @@ public class EmployeeController {
     @Operation(summary = "Set task on employee",
             description = "Set task on employee, need json body.")
     @PostMapping(value = "/settask",consumes = APPLICATION_JSON_VALUE)
-   // @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<Employee>> setTaskOnEmployee(@RequestBody PostSetTaskRequest postSetTaskRequest) {
         try {
             return new ResponseEntity<>(employeeService.setTaskOnEmployee(postSetTaskRequest), HttpStatus.OK);
@@ -197,6 +190,8 @@ public class EmployeeController {
         }
     }
 
+    @Operation(summary = "Set department on employee",
+            description = "Set salary on employee, need json body.")
     @PostMapping(value = "/setdep")
     @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<Employee>> setDepartmentOnEmployee(@RequestBody PostSetDepartmentOnEmployeeRequest postSetDepartmentOnEmployee) {

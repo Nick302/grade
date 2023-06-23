@@ -38,9 +38,8 @@ public class SpringSecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(API_AUTH_SECURITY, API_DOCS, URL_SWAGGER).permitAll()
                 .requestMatchers(API_EMPLOYEE_SECURITY, API_TASK_SECURITY).hasRole("user")
-                .requestMatchers(API_SALARY_SECURITY, API_DEPARTMENT_SECURITY, API_PREMIUM_SECURITY, "/api/v1/report/**").hasRole("admin")
+                .requestMatchers(API_SALARY_SECURITY, API_DEPARTMENT_SECURITY, API_PREMIUM_SECURITY, API_REPORT_SECURITY).hasRole("admin")
                 .anyRequest().authenticated()
-
                 .and()
                 .csrf().disable()
                 .cors()

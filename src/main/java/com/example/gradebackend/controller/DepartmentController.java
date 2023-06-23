@@ -43,9 +43,9 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentService.getAllDepartmentsByPage(pageable), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,9 +61,9 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentService.getDepartmentById(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,9 +79,9 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentService.createDepartment(department), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -117,9 +117,9 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentService.deleteDepartmentById(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

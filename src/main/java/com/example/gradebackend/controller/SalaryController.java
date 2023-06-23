@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -40,9 +41,9 @@ public class SalaryController {
             return new ResponseEntity<>(salaryService.getAll(), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -56,30 +57,34 @@ public class SalaryController {
             return new ResponseEntity<>(salaryService.createSalary(postCreateSalary), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping(value = "/position",consumes = APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create position",
+            description = "Create position, need json body.")
+    @PostMapping(value = "/position", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<Position>> createPosition(@RequestBody PostCreatePosition position) {
         try {
             return new ResponseEntity<>(salaryService.createPosition(position), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @Operation(summary = "Get salary by id",
+            description = "Get salary by id employee.")
     @GetMapping("/get/{id}")
     @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<Salary>> getSalaryById(@PathVariable Integer id) {
@@ -87,9 +92,9 @@ public class SalaryController {
             return new ResponseEntity<>(salaryService.getSalaryById(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -105,9 +110,9 @@ public class SalaryController {
             return new ResponseEntity<>(salaryService.updateSalary(id, salary), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -123,9 +128,9 @@ public class SalaryController {
             return new ResponseEntity<>(salaryService.deleteSalary(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

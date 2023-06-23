@@ -102,13 +102,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(foundTask.get());
         taskRepository.flush();
 
-      /*  List<Task> tasksOurDep = foundDepartment.get().getTasks();
-        tasksOurDep.add(foundTask.get());
-        foundDepartment.get().setTasks(tasksOurDep);
-
-        departmentRepository.save(foundDepartment.get());
-        departmentRepository.flush();*/
-
         return Optional.ofNullable(foundTask.get());
     }
 

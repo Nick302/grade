@@ -6,13 +6,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.CreatedResponseUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +27,6 @@ public class AuthController {
 
     private final KeycloakUtils keycloakUtils;
 
-    @GetMapping("me")
-    @PreAuthorize("hasRole('user')")
-    public String test(@AuthenticationPrincipal Jwt jwt){
-        // var infoClaim = (String) jwt.getClaim("preferred_username");
-        var myId = (String) jwt.getSubject();
-        return "You id: " + myId + "\n<br> You email: " + (String) jwt.getClaim("email");
-    }
-
-
     @PostMapping
     public ResponseEntity createUserKC(@RequestBody UserDTO userDTO)
     {
@@ -48,7 +38,7 @@ public class AuthController {
             return new ResponseEntity("user email already exists" + userDTO.getEmail(), HttpStatus.CONFLICT);
         }
 
-        defaultRoles.add(USER_ROLE_NAME); // эта роль должна существовать на уровне реалма а не в клиенте только
+        defaultRoles.add(USER_ROLE_NAME);
         keycloakUtils.addRoles(userId, defaultRoles);
 
         return ResponseEntity.status(resp.getStatus()).build();

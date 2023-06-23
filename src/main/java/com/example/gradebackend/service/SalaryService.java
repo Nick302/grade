@@ -1,6 +1,8 @@
 package com.example.gradebackend.service;
 
+import com.example.gradebackend.model.domain.Position;
 import com.example.gradebackend.model.domain.Salary;
+import com.example.gradebackend.model.dto.request.PostCreatePosition;
 import com.example.gradebackend.model.dto.request.PostCreateSalary;
 
 import java.util.List;
@@ -15,4 +17,8 @@ public interface SalaryService {
     Optional<Salary> updateSalary(Integer id, Salary salary);
 
     boolean deleteSalary(Integer id);
+
+    Optional<Position> createPosition(PostCreatePosition position);
+
+    Optional<Salary> getSalaryById(Integer id);
 }

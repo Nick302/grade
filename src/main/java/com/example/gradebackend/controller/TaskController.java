@@ -36,7 +36,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    //TODO: Обновить чтоб post запрос и pojo
     @Operation(
             summary = "Getting a complete list of tasks by status",
             description = "Getting a complete list of tasks by status, id and status need in url")
@@ -47,9 +46,9 @@ public class TaskController {
             return new ResponseEntity<>(taskService.getAllTaskEmployeeByStatus(id, status), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,9 +64,9 @@ public class TaskController {
             return new ResponseEntity<>(taskService.getAllTaskByEmployee(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,15 +77,14 @@ public class TaskController {
             summary = "Getting a complete list of tasks by date",
             description = "Getting a complete list of tasks by date, need json body")
     @PostMapping(value = "/date", consumes = APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<List<Task>>> getAllTaskEmployeeByDate(@RequestBody GetTaskByDate taskByDate) {
         try {
             return new ResponseEntity<>(taskService.getAllTaskEmployeeByDate(taskByDate), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -104,9 +102,9 @@ public class TaskController {
             return new ResponseEntity<>(taskService.getAllTaskByPage(pageable), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -120,9 +118,9 @@ public class TaskController {
             return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -139,9 +137,9 @@ public class TaskController {
             return new ResponseEntity<>(taskService.createTask(task), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -152,15 +150,14 @@ public class TaskController {
             summary = "Update task",
             description = "Update task, need id for url and employee in json body")
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<Task>> updateTask(@PathVariable Integer id, @RequestBody Task task) {
         try {
             return new ResponseEntity<>(taskService.updateTask(id, task), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -177,15 +174,18 @@ public class TaskController {
             return new ResponseEntity<>(taskService.deleteTask(id), HttpStatus.OK);
         } catch (HttpClientErrorException.Unauthorized e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }/* catch (AccessDeniedException e) {
+        } catch (AccessDeniedException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }*/ catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @Operation(
+            summary = "Set task",
+            description = "Set task, need json body.")
     @PostMapping(value = "/settask",consumes = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('admin')")
     public ResponseEntity<Optional<Task>> setTaskOnDepartment(@RequestBody PostSetTaskRequestDepartment postSetTaskRequest) {

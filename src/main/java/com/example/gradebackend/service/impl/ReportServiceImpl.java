@@ -6,6 +6,7 @@ import com.example.gradebackend.model.domain.Report;
 import com.example.gradebackend.model.domain.Salary;
 import com.example.gradebackend.model.dto.request.PostCreateSalary;
 import com.example.gradebackend.repository.ReportRepository;
+import com.example.gradebackend.service.ReportService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -19,21 +20,24 @@ import java.util.Optional;
 @Data
 @Service
 @Transactional
-public class ReportServiceImpl {
+public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository repository;
 
     @Transactional(readOnly = true)
+    @Override
     public Optional<List<Report>> getAllReportsByPage(Pageable pageable) {
         return repository.findAllBy(pageable);
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public Optional<Report> createReport(Report report) {
         return Optional.ofNullable(repository.save(report));
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public boolean deleteReport(Integer id) {
         Optional<Report> reportForDelete = repository.findById(id);
 
