@@ -1,12 +1,10 @@
 package com.example.gradebackend.service.impl;
 
-import com.example.gradebackend.exceptions.ResourceNotFoundException;
 import com.example.gradebackend.model.domain.Department;
 import com.example.gradebackend.repository.DepartmentRepository;
 import com.example.gradebackend.service.DepartmentService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

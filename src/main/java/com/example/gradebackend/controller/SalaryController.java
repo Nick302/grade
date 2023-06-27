@@ -2,7 +2,6 @@ package com.example.gradebackend.controller;
 
 import com.example.gradebackend.model.domain.Position;
 import com.example.gradebackend.model.domain.Salary;
-import com.example.gradebackend.model.domain.Task;
 import com.example.gradebackend.model.dto.request.PostCreatePosition;
 import com.example.gradebackend.model.dto.request.PostCreateSalary;
 import com.example.gradebackend.service.impl.SalaryServiceImpl;

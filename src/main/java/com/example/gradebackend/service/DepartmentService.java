@@ -1,7 +1,6 @@
 package com.example.gradebackend.service;
 
 import com.example.gradebackend.model.domain.Department;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

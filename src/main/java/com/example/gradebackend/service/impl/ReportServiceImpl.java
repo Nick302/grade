@@ -1,10 +1,6 @@
 package com.example.gradebackend.service.impl;
 
-import com.example.gradebackend.model.domain.Position;
-import com.example.gradebackend.model.domain.Premium;
 import com.example.gradebackend.model.domain.Report;
-import com.example.gradebackend.model.domain.Salary;
-import com.example.gradebackend.model.dto.request.PostCreateSalary;
 import com.example.gradebackend.repository.ReportRepository;
 import com.example.gradebackend.service.ReportService;
 import lombok.Data;

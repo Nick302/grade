@@ -1,25 +1,21 @@
 package com.example.gradebackend.controller;
 
 import com.example.gradebackend.model.domain.Department;
-import com.example.gradebackend.model.domain.Employee;
 import com.example.gradebackend.service.impl.DepartmentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.example.gradebackend.util.Constant.API_DEPARTMENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

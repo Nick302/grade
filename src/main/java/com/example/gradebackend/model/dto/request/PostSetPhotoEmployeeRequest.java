@@ -1,7 +1,5 @@
 package com.example.gradebackend.model.dto.request;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PostSetPhotoEmployeeRequest {

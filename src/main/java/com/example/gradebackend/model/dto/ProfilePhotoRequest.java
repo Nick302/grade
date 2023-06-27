@@ -6,8 +6,6 @@ public class ProfilePhotoRequest {
 
     private MultipartFile photo;
 
-
-
     public MultipartFile getPhoto() {
         return photo;
     }

@@ -1,6 +1,5 @@
 package com.example.gradebackend.controller;
 
-import com.example.gradebackend.model.domain.Premium;
 import com.example.gradebackend.model.domain.Report;
 import com.example.gradebackend.service.impl.ReportServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

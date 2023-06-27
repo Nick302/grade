@@ -1,6 +1,5 @@
 package com.example.gradebackend.service.impl;
 
-import com.example.gradebackend.model.domain.Employee;
 import com.example.gradebackend.model.domain.Position;
 import com.example.gradebackend.model.domain.PositionTitle;
 import com.example.gradebackend.model.domain.Salary;

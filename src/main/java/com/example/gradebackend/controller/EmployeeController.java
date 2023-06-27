@@ -2,14 +2,16 @@ package com.example.gradebackend.controller;
 
 import com.example.gradebackend.model.domain.Employee;
 import com.example.gradebackend.model.dto.ProfilePhotoRequest;
-import com.example.gradebackend.model.dto.request.*;
+import com.example.gradebackend.model.dto.request.PostGetEmployeeByEmailRequest;
+import com.example.gradebackend.model.dto.request.PostSetDepartmentOnEmployeeRequest;
+import com.example.gradebackend.model.dto.request.PostSetSalaryRequest;
+import com.example.gradebackend.model.dto.request.PostSetTaskRequest;
 import com.example.gradebackend.service.impl.EmployeeServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

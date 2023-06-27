@@ -4,7 +4,6 @@ import com.example.gradebackend.model.domain.Status;
 import com.example.gradebackend.model.domain.Task;
 import com.example.gradebackend.model.dto.request.GetTaskByDate;
 import com.example.gradebackend.model.dto.request.PostSetTaskRequestDepartment;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
